@@ -70,7 +70,7 @@ public class UsersServices {
 
     public ResponseEntity addUser(Users user) throws Exception {
         Optional<Users> list = usersRepositories.findByEmail(user.getEmail());
-        if(list.isEmpty()){
+        if(list.isPresent()){
             user.setRegisteredDate(new Date());
             user.setEnabled(false);
             usersRepositories.save(user);
