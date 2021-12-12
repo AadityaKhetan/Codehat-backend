@@ -40,7 +40,7 @@ public class UsersServices {
 
     public boolean checkIfUserExists(long id){
         Optional<Users> list = usersRepositories.findById(id);
-        if(list.isEmpty()){
+        if(list.isPresent()){
             return false;
         }
         else{
