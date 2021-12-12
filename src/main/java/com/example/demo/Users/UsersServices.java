@@ -70,13 +70,13 @@ public class UsersServices {
 
     public ResponseEntity addUser(Users user) throws Exception {
         Optional<Users> list = usersRepositories.findByEmail(user.getEmail());
-        if(list.isPresent()){
+        if(!list.isPresent()){
             user.setRegisteredDate(new Date());
             user.setEnabled(false);
             usersRepositories.save(user);
 
             // send-mail
-            EmailConfirmation emailConfirmation = new EmailConfirmation(user);
+            /*EmailConfirmation emailConfirmation = new EmailConfirmation(user);
             emailConfirmationRepositories.save(emailConfirmation);
 
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -84,7 +84,7 @@ public class UsersServices {
             simpleMailMessage.setFrom("18it032@charusat.edu.in");
             simpleMailMessage.setSubject("Complete Registration!!");
             simpleMailMessage.setText("To confirm you account, please click here:" + "http://localhost:8080/confirm-account?token="+emailConfirmation.getConfirmationToken());
-            emailService.sendEmail(simpleMailMessage);
+            emailService.sendEmail(simpleMailMessage);*/
 
             return ResponseEntity.ok().build();
         } else{
